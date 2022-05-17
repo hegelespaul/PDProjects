@@ -1,0 +1,77 @@
+#N canvas 0 22 1920 1036 12;
+#X obj 307 651 /~ 4;
+#X obj 307 675 hip~ 3;
+#X obj 307 699 clip~ -1 1;
+#X obj 307 723 /~ 2;
+#X obj 307 747 dac~ 1 2;
+#X obj 307 542 *~ 1;
+#X obj 485 540 loadbang;
+#X obj 485 563 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 485 586 metro 100;
+#X obj 485 610 tabwrite~ \$0-scope;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 486 660 graph;
+#X obj 78 286 adc~ 1;
+#X obj 158 420 writesf~;
+#X msg 208 360 stop;
+#X obj 558 384 bng 19 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X msg 558 408 open ./archivo.wav \, start;
+#X obj 558 432 readsf~;
+#X obj 644 50 tgl 19 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 644 122 + 1;
+#X obj 644 191 readsf~;
+#X text 157 300 // Crea un archivo de audio y graba;
+#X text 208 340 // Deten la grabacion;
+#X obj 313 245 tgl 19 0 empty empty REC 22 10 0 12 #fcfcfc #000000
+#ffffff 0 1;
+#X obj 313 269 sel 1 0;
+#X obj 569 227 key;
+#X floatatom 569 251 5 0 0 0 - - - 0;
+#X obj 569 274 sel 61;
+#X obj 56 239 cnv 7 7 140 empty empty writesf~ 12 8 0 16 #faff00 #faff00
+0;
+#X obj 536 329 cnv 7 7 140 empty empty readsf~ 12 8 0 16 #faff00 #faff00
+0;
+#X text 56 129 Grabacion y reproduccion de archivos ––––;
+#X text 56 149 Esta es la manera mas directa de grabar y leer un archivo
+de audio.;
+#X text 78 266 A) Graba un archivo de audio;
+#X text 558 352 B) Reproduce un archivo de audio;
+#X text 651 25 C) Reproduce aleatoriamente;
+#X msg 157 320 open ./a-4.wav \, start;
+#X obj 644 98 random 4;
+#X floatatom 644 145 5 0 0 0 - - - 0;
+#X obj 644 74 metro 500;
+#X msg 644 167 open ../audios/a-\$1.wav \, start;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 0 4 1;
+#X connect 5 0 0 0;
+#X connect 5 0 9 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 11 0 12 0;
+#X connect 13 0 12 0;
+#X connect 14 0 15 0;
+#X connect 15 0 16 0;
+#X connect 16 0 5 0;
+#X connect 17 0 37 0;
+#X connect 18 0 36 0;
+#X connect 22 0 23 0;
+#X connect 23 0 34 0;
+#X connect 23 1 13 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 34 0 12 0;
+#X connect 35 0 18 0;
+#X connect 36 0 38 0;
+#X connect 37 0 35 0;
+#X connect 38 0 19 0;

@@ -1,0 +1,81 @@
+#N canvas -20 22 1920 1036 12;
+#X obj 585 386 loadbang;
+#X msg 585 410 db 1 \, log 1;
+#X obj 314 353 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 314 373 metro 100;
+#X obj 314 396 tabwrite~ \$0-scope;
+#X obj 166 458 dac~ 1 2;
+#X obj 169 370 *~ 1;
+#X obj 585 433 spectrograph~ 1024 1 1 300 140 100;
+#X obj 162 27 notein;
+#X floatatom 162 70 5 0 0 0 - - - 0;
+#X floatatom 212 70 5 0 0 0 - - - 0;
+#X text 253 71 Velocidad;
+#X text 113 70 Nota;
+#X text 236 102 Voz \, Nota \, Velocidad;
+#X obj 162 125 pack f f f;
+#X obj 162 102 poly 6 1;
+#X obj 162 158 route 1 2 3 4 5 6;
+#X obj 162 231 voz-marimba;
+#X obj 252 231 voz-marimba;
+#X obj 342 231 voz-marimba;
+#X obj 432 231 voz-marimba;
+#X obj 522 231 voz-marimba;
+#X obj 612 231 voz-marimba;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 3;
+#A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0;
+#X coords 0 1 441 -1 200 140 1;
+#X restore 769 109 graph;
+#X obj 192 315 /~ 4;
+#X obj 166 415 *~ 0.5;
+#X text 736 296 1) Escojan cualquier insutrumento;
+#X text 736 316 2) Cambiar inharmonicos con control de relacion;
+#X text 736 336 3) Vibrato y tremolo con controles;
+#X text 736 356 4) Agregar tremolo a harmonicos especificos;
+#X text 736 375 5) poner control de ataque y decay a diferentes armonicos
+;
+#X connect 0 0 1 0;
+#X connect 1 0 7 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 6 0 7 0;
+#X connect 6 0 4 0;
+#X connect 6 0 25 0;
+#X connect 8 0 9 0;
+#X connect 8 1 10 0;
+#X connect 9 0 15 0;
+#X connect 10 0 15 1;
+#X connect 14 0 16 0;
+#X connect 15 0 14 0;
+#X connect 15 1 14 1;
+#X connect 15 2 14 2;
+#X connect 16 0 17 0;
+#X connect 16 1 18 0;
+#X connect 16 2 19 0;
+#X connect 16 3 20 0;
+#X connect 16 4 21 0;
+#X connect 16 5 22 0;
+#X connect 17 0 24 0;
+#X connect 18 0 24 0;
+#X connect 19 0 24 0;
+#X connect 20 0 24 0;
+#X connect 21 0 24 0;
+#X connect 22 0 24 0;
+#X connect 24 0 6 0;
+#X connect 25 0 5 0;
+#X connect 25 0 5 1;

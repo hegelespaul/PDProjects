@@ -1,0 +1,43 @@
+#N canvas 501 22 1419 1036 12;
+#X obj 81 82 osc~ 440;
+#X obj 81 348 dac~;
+#X text 112 60 Entrada: frecuencia (Hz);
+#X floatatom 81 26 5 0 0 0 - - - 0;
+#X text 88 100 Salida: Audio (-1 a 1);
+#X text 81 369 Salida de audio;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 531 174 graph;
+#X obj 391 255 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 391 275 metro 100;
+#X obj 391 298 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 391 328 tabwrite~ \$0-scope;
+#X obj 83 196 clip~ -1 1;
+#X obj 83 168 *~ 0.5;
+#X obj 83 219 *~ 0.5;
+#X text 137 168 <- -6 dB;
+#X text 138 221 <- -6 dB;
+#X text 159 197 <- limitador;
+#X obj 267 190 hsl 128 15 0 1 0 0 empty empty Volumen -2 -8 0 10 #00ff04
+#000000 #000000 0 1;
+#X floatatom 264 210 5 0 0 0 - - - 0;
+#X obj 262 262 line~;
+#X obj 83 292 *~;
+#X obj 262 239 pack f 20;
+#X connect 0 0 12 0;
+#X connect 3 0 0 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 9 0 10 0;
+#X connect 11 0 13 0;
+#X connect 12 0 11 0;
+#X connect 13 0 20 0;
+#X connect 17 0 18 0;
+#X connect 18 0 21 0;
+#X connect 19 0 20 1;
+#X connect 20 0 1 0;
+#X connect 20 0 1 1;
+#X connect 21 0 19 0;

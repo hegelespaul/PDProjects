@@ -1,0 +1,61 @@
+#N canvas 0 22 1920 1036 12;
+#X obj 307 651 /~ 4;
+#X obj 307 675 hip~ 3;
+#X obj 307 699 clip~ -1 1;
+#X obj 307 723 /~ 2;
+#X obj 307 747 dac~ 1 2;
+#X obj 307 542 *~ 1;
+#X obj 485 540 loadbang;
+#X obj 485 563 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 485 586 metro 100;
+#X obj 485 610 tabwrite~ \$0-scope;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 486 660 graph;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array array1 88200 float 0;
+#X coords 0 1 88199 -1 200 140 1;
+#X restore 63 389 graph;
+#X obj 487 370 tabread4~ array1;
+#X text 481 213 Loop con velocidad de reproduccion;
+#X msg 797 393 0 \, 44100 1000;
+#X obj 797 417 vline~;
+#X obj 797 461 tabread4~ array1;
+#X obj 230 280 adc~ 1;
+#X obj 296 289 bng 19 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 226 89 Escritura y lectura de archivos dinamica ––––––
+;
+#X text 227 253 Escritura de array;
+#X text 790 367 Reproduccion una vez;
+#X obj 207 221 cnv 7 7 140 empty empty tabwrite~ 12 8 0 16 #faff00
+#faff00 0;
+#X obj 230 324 tabwrite~ array1;
+#X obj 463 181 cnv 7 7 140 empty empty tabread4~ 12 8 0 16 #faff00
+#faff00 0;
+#X text 609 371 Argumento: Array;
+#X obj 487 242 phasor~ 0.5;
+#X obj 487 296 *~ 88200;
+#X text 548 294 <- Duracion (samples);
+#X text 571 242 <- Velocidad de reproduccion (Hz);
+#X obj 770 338 cnv 7 7 140 empty empty tabread4~\\\ vline~ 12 8 0 16
+#faff00 #faff00 0;
+#X text 557 345 Entrada: Indice del Sample;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 3 0 4 1;
+#X connect 5 0 0 0;
+#X connect 5 0 9 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 9 0;
+#X connect 14 0 15 0;
+#X connect 15 0 16 0;
+#X connect 17 0 23 0;
+#X connect 18 0 23 0;
+#X connect 26 0 27 0;
+#X connect 27 0 12 0;

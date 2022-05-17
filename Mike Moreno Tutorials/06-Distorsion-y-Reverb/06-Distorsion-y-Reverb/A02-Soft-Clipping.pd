@@ -1,0 +1,161 @@
+#N canvas 11 34 1920 1036 12;
+#X obj 62 545 hip~ 3;
+#X obj 62 569 clip~ -1 1;
+#X obj 62 593 /~ 2;
+#X obj 62 617 dac~ 1 2;
+#X obj 198 425 loadbang;
+#X obj 198 448 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 198 471 metro 100;
+#X obj 198 495 tabwrite~ \$0-scope;
+#X obj 21 21 cnv 7 7 140 empty empty soft\\\ clipping 12 8 0 16 #faff00
+#faff00 0;
+#X msg 152 201 open ./guitar.wav \, start;
+#X obj 152 225 readsf~;
+#X obj 62 447 catch~ \$0-output;
+#X obj 62 347 throw~ \$0-output;
+#X obj 62 476 *~ 1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 1421 349 graph;
+#X obj 62 313 expr~ tanh($v1);
+#X text 172 313 <- tangente hiperbólica;
+#X text 42 41 Por otro lado el "soft clipping" crea una distorsion
+gradual este tipo de distorsion es relacionado con la distorsion analoga
+y se usa en el tipo de distorsion "overdrive".;
+#X obj 1352 710 throw~ \$0-output;
+#X obj 682 245 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#dcdcdc #000000 #000000 0 256;
+#X obj 685 223 hsl 128 15 0 5 0 0 empty empty empty -2 -8 0 10 #dcdcdc
+#000000 #000000 0 1;
+#X obj 682 266 else/float2sig~ 50;
+#X msg 642 161 open ./guitar.wav \, start;
+#X obj 642 185 readsf~;
+#X obj 62 279 *~;
+#X text 552 105 else/drive~;
+#X text 562 125 Soft clipping con diferentes modos.;
+#X msg 962 161 open ./guitar.wav \, start;
+#X obj 962 185 readsf~;
+#X obj 872 339 clip~ -1 1;
+#X obj 912 368 pow~ 3;
+#X obj 912 392 /~ 3;
+#X obj 872 421 -~;
+#X obj 1022 246 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 #dcdcdc #000000 #000000 0 256;
+#X obj 1025 224 hsl 128 15 0 5 0 0 empty empty empty -2 -8 0 10 #dcdcdc
+#000000 #000000 0 1;
+#X obj 1022 267 pack f 20;
+#X obj 1022 291 line~;
+#X obj 872 310 *~;
+#X obj 872 455 throw~ \$0-output;
+#X obj 531 81 cnv 7 7 140 empty empty drive~ 12 8 0 16 #faff00 #faff00
+0;
+#X obj 851 81 cnv 7 7 140 empty empty otra\\\ manera 12 8 0 16 #faff00
+#faff00 0;
+#X msg 1292 161 open ./guitar.wav \, start;
+#X obj 1292 185 readsf~;
+#X obj 1352 246 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 #dfdfdf #000000 #000000 0 256;
+#X obj 1355 224 hsl 128 15 0 5 0 0 empty empty empty -2 -8 0 10 #dfdfdf
+#000000 #000000 0 1;
+#X obj 1352 267 pack f 20;
+#X obj 1352 291 line~;
+#X obj 1202 310 *~;
+#X obj 1202 368 throw~ \$0-output;
+#X obj 1181 81 cnv 7 7 140 empty empty aproximación 12 8 0 16 #faff00
+#faff00 0;
+#X obj 1202 339 ws.tanh~;
+#X text 872 105 [clip~ -1 1] con [pow~ 3];
+#X text 882 125 Otra manera de hacer soft-clipping.;
+#X text 1202 105 [ws.tanh~];
+#X text 1212 125 Aproximación vanilla de la tangente hiperbólica.
+;
+#X obj 345 215 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#dcdcdc #000000 #000000 0 256;
+#X obj 348 193 hsl 128 15 0 5 0 0 empty empty empty -2 -8 0 10 #dcdcdc
+#000000 #000000 0 1;
+#X obj 345 236 pack f 20;
+#X obj 345 260 line~;
+#X text 52 101 Ejemplo: escuchemos dos audios de prueba \, un oscilador
+senoidal y una guitarra eléctrica.;
+#X obj 62 177 osc~ 110;
+#X obj 62 225 *~;
+#X obj 80 201 osc~ 0.25;
+#X obj 552 185 osc~ 110;
+#X obj 552 233 *~;
+#X obj 570 209 osc~ 0.25;
+#X obj 872 185 osc~ 110;
+#X obj 872 233 *~;
+#X obj 890 209 osc~ 0.25;
+#X obj 1202 185 osc~ 110;
+#X obj 1202 233 *~;
+#X obj 1220 209 osc~ 0.25;
+#X obj 62 521 /~ 4;
+#X obj 562 302 else/drive~ -mode 1;
+#X obj 1324 529 osc~ 440;
+#X obj 1350 584 /~ 4;
+#X obj 1349 641 -~ 0.25;
+#X obj 1349 664 cos~;
+#X obj 1324 552 *~;
+#X floatatom 1401 537 5 0 0 0 - - - 0;
+#X obj 1350 607 clip~ -1 1;
+#X obj 562 326 throw~ \$0-output;
+#X obj 1211 461 cnv 7 7 140 empty empty senoidal 12 8 0 16 #faff00
+#faff00 0;
+#X text 1232 485 senoidal;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 9 0 10 0;
+#X connect 11 0 13 0;
+#X connect 13 0 7 0;
+#X connect 13 0 72 0;
+#X connect 15 0 12 0;
+#X connect 19 0 21 0;
+#X connect 20 0 19 0;
+#X connect 21 0 73 1;
+#X connect 22 0 23 0;
+#X connect 24 0 15 0;
+#X connect 27 0 28 0;
+#X connect 29 0 30 0;
+#X connect 29 0 32 0;
+#X connect 30 0 31 0;
+#X connect 31 0 32 1;
+#X connect 32 0 38 0;
+#X connect 33 0 35 0;
+#X connect 34 0 33 0;
+#X connect 35 0 36 0;
+#X connect 36 0 37 1;
+#X connect 37 0 29 0;
+#X connect 41 0 42 0;
+#X connect 43 0 45 0;
+#X connect 44 0 43 0;
+#X connect 45 0 46 0;
+#X connect 46 0 47 1;
+#X connect 47 0 50 0;
+#X connect 50 0 48 0;
+#X connect 55 0 57 0;
+#X connect 56 0 55 0;
+#X connect 57 0 58 0;
+#X connect 58 0 24 1;
+#X connect 60 0 61 0;
+#X connect 62 0 61 1;
+#X connect 63 0 64 0;
+#X connect 65 0 64 1;
+#X connect 66 0 67 0;
+#X connect 68 0 67 1;
+#X connect 69 0 70 0;
+#X connect 71 0 70 1;
+#X connect 72 0 0 0;
+#X connect 73 0 81 0;
+#X connect 75 0 80 0;
+#X connect 76 0 77 0;
+#X connect 77 0 18 0;
+#X connect 78 0 75 0;
+#X connect 79 0 78 1;
+#X connect 80 0 76 0;

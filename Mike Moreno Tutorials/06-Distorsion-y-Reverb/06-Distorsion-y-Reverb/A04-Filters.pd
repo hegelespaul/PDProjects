@@ -1,0 +1,97 @@
+#N canvas 28 35 1920 1036 12;
+#X obj 62 655 hip~ 3;
+#X obj 62 679 clip~ -1 1;
+#X obj 62 703 /~ 2;
+#X obj 62 727 dac~ 1 2;
+#X obj 198 535 loadbang;
+#X obj 198 558 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 198 581 metro 100;
+#X obj 198 605 tabwrite~ \$0-scope;
+#X obj 21 21 cnv 7 7 140 empty empty Filtros 12 8 0 16 #faff00 #faff00
+0;
+#X obj 62 557 catch~ \$0-output;
+#X obj 502 508 throw~ \$0-output;
+#X obj 62 586 *~ 1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 421 583 graph;
+#X text 42 41 Usar filtros o EQ en Pre enfatiza ciertas frecuencias
+a distorsionar más que otras.;
+#X text 42 81 Al hacer "crossover" podemos volver sumar las frecuencias
+filtradas al final para recuperarlas.;
+#X msg 502 65 open ./guitar.wav \, start;
+#X obj 502 89 readsf~;
+#X obj 502 271 -~;
+#X obj 572 291 else/drive~;
+#X obj 817 205 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#faff00 #000000 #000000 0 256;
+#X obj 820 184 hsl 128 15 1 50 0 1 empty empty Ganancia\\\ (1\\\ a\\\ 50\\\ dB)
+-2 -8 0 10 #faff00 #000000 #faff00 9450 1;
+#X floatatom 722 42 5 0 0 0 - - - 0;
+#X obj 722 65 mtof;
+#X obj 722 89 osc~;
+#X obj 502 143 +~;
+#X obj 647 182 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#faff00 #000000 #000000 0 256;
+#X obj 650 160 hsl 128 15 220 4400 1 1 empty empty Frecuencia -2 -8
+0 10 #faff00 #000000 #faff00 11000 1;
+#X obj 647 203 else/float2sig~ 50;
+#X obj 817 224 + 100;
+#X obj 817 248 dbtorms;
+#X obj 817 272 else/float2sig~ 50;
+#X obj 572 315 else/power~ 2;
+#X obj 502 354 -~;
+#X text 532 354 <- Vuelve a sumar la señal seca y distorsionada;
+#X text 113 271 Resta highpass a señal seca para hacer "crossover"
+->;
+#X obj 502 467 else/lowpass~ 9000 0.7;
+#X obj 577 417 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#faff00 #000000 #000000 0 256;
+#X obj 580 395 hsl 128 15 1000 20000 1 1 empty empty Frecuencia -2
+-8 0 10 #faff00 #000000 #faff00 7700 1;
+#X obj 577 438 else/float2sig~ 50;
+#X text 662 467 <- lowpass para reducir el "brillo" de la distorsion
+;
+#X text 42 121 Usar filtros o EQ en post resalta o quita ciertas frecuencias.
+;
+#X text 42 170 Queda pendiente encontrar cual de estos dos parametros
+es el "Tone" de un pedal de distorsión.;
+#X obj 62 631 /~ 4;
+#X obj 572 232 else/highpass~ 440 0.7;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 9 0 11 0;
+#X connect 11 0 7 0;
+#X connect 11 0 42 0;
+#X connect 15 0 16 0;
+#X connect 16 0 24 0;
+#X connect 17 0 32 0;
+#X connect 18 0 31 0;
+#X connect 19 0 28 0;
+#X connect 20 0 19 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 24 0 17 0;
+#X connect 24 0 43 0;
+#X connect 25 0 27 0;
+#X connect 26 0 25 0;
+#X connect 27 0 43 1;
+#X connect 28 0 29 0;
+#X connect 29 0 30 0;
+#X connect 30 0 18 1;
+#X connect 31 0 32 1;
+#X connect 32 0 35 0;
+#X connect 35 0 10 0;
+#X connect 36 0 38 0;
+#X connect 37 0 36 0;
+#X connect 38 0 35 1;
+#X connect 42 0 0 0;
+#X connect 43 0 17 1;
+#X connect 43 0 18 0;

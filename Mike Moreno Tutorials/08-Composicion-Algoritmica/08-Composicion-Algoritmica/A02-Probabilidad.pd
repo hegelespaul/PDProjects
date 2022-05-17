@@ -1,0 +1,123 @@
+#N canvas 0 22 1920 1036 12;
+#X obj 23 330 hip~ 3;
+#X obj 23 354 clip~ -1 1;
+#X obj 23 378 /~ 2;
+#X obj 23 402 dac~ 1 2;
+#X obj 159 210 loadbang;
+#X obj 159 233 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 159 256 metro 100;
+#X obj 159 280 tabwrite~ \$0-scope;
+#X obj 23 232 catch~ \$0-output;
+#X obj 23 261 *~ 1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 309 210 graph;
+#X obj 23 306 /~ 4;
+#X obj 876 49 nbx 3 19 30 300 0 1 empty empty BPM 0 -8 0 12 #00ff04
+#000000 #000000 120 256;
+#X msg 876 73 60000 \$1;
+#X obj 876 97 /;
+#X obj 876 121 / 4;
+#X obj 834 139 tgl 19 0 empty empty empty 17 7 0 10 #00ff04 #000000
+#000000 0 1;
+#X obj 834 173 metro;
+#X floatatom 876 145 5 0 0 0 - - - 0;
+#X obj 834 197 bng 19 250 50 0 empty empty empty 17 7 0 10 #faff00
+#000000 #000000;
+#X obj 794 480 random 3;
+#X floatatom 794 504 5 0 0 0 - - - 0;
+#X obj 664 575 sel 0 1 2;
+#X obj 554 614 bng 19 250 50 0 empty empty empty 17 7 0 10 #faff00
+#000000 #000000;
+#X obj 684 614 bng 19 250 50 0 empty empty empty 17 7 0 10 #faff00
+#000000 #000000;
+#X obj 814 614 bng 19 250 50 0 empty empty empty 17 7 0 10 #faff00
+#000000 #000000;
+#X msg 554 638 open ./BD.wav \, 1;
+#X obj 554 662 readsf~;
+#X obj 684 662 readsf~;
+#X obj 814 662 readsf~;
+#X msg 684 638 open ./SD.wav \, 1;
+#X msg 814 638 open ./HH.wav \, 1;
+#X obj 684 720 throw~ \$0-output;
+#X obj 866 275 i;
+#X obj 906 275 + 1;
+#X obj 866 323 sel 0;
+#X obj 866 347 bng 19 250 50 0 empty empty empty 17 7 0 10 #00faff
+#000000 #000000;
+#X obj 834 226 t b b;
+#X obj 684 696 +~;
+#X msg 866 431 seed 154611;
+#X obj 866 299 % 16;
+#X obj 558 87 cnv 7 7 140 empty empty random 12 8 0 16 #faff00 #faff00
+0;
+#X text 9 10 Probabilidad ––––––;
+#X obj 664 255 t b b;
+#X obj 664 546 i;
+#X obj 664 439 random 100;
+#X obj 664 487 sel 1;
+#X obj 664 511 bng 19 250 50 0 empty empty empty 17 7 0 10 #faff00
+#000000 #000000;
+#X msg 684 400 seed 16567;
+#X obj 664 463 < 70;
+#X text 424 453 70% de probabilidad de trigger ->;
+#X text 19 28 También podemos usar estos números aleatorios y sus
+semillas para determinar cierta probabilidad de disparar la secuencia
+o números generados.;
+#X obj 689 348 nbx 3 19 0 100 0 1 empty empty Probabilidad\ (%) 0 -8
+0 12 #00ff04 #000000 #000000 70 256;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 8 0 9 0;
+#X connect 9 0 7 0;
+#X connect 9 0 11 0;
+#X connect 11 0 0 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 15 0 18 0;
+#X connect 16 0 17 0;
+#X connect 17 0 19 0;
+#X connect 18 0 17 1;
+#X connect 19 0 37 0;
+#X connect 20 0 21 0;
+#X connect 21 0 44 1;
+#X connect 22 0 23 0;
+#X connect 22 1 24 0;
+#X connect 22 2 25 0;
+#X connect 23 0 26 0;
+#X connect 24 0 30 0;
+#X connect 25 0 31 0;
+#X connect 26 0 27 0;
+#X connect 27 0 38 0;
+#X connect 28 0 38 0;
+#X connect 29 0 38 0;
+#X connect 30 0 28 0;
+#X connect 31 0 29 0;
+#X connect 33 0 34 0;
+#X connect 33 0 40 0;
+#X connect 34 0 33 1;
+#X connect 35 0 36 0;
+#X connect 36 0 39 0;
+#X connect 36 0 48 0;
+#X connect 37 0 43 0;
+#X connect 37 1 33 0;
+#X connect 38 0 32 0;
+#X connect 39 0 20 0;
+#X connect 40 0 35 0;
+#X connect 43 0 45 0;
+#X connect 43 1 20 0;
+#X connect 44 0 22 0;
+#X connect 45 0 49 0;
+#X connect 46 0 47 0;
+#X connect 47 0 44 0;
+#X connect 48 0 45 0;
+#X connect 49 0 46 0;
+#X connect 52 0 49 1;

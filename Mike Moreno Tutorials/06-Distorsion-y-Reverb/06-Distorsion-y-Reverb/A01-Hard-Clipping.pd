@@ -1,0 +1,92 @@
+#N canvas 1 22 1920 1036 12;
+#X obj 53 790 hip~ 3;
+#X obj 53 814 clip~ -1 1;
+#X obj 53 838 /~ 2;
+#X obj 53 862 dac~ 1 2;
+#X obj 189 670 loadbang;
+#X obj 189 693 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 189 716 metro 100;
+#X obj 189 740 tabwrite~ \$0-scope;
+#X obj 12 266 cnv 7 7 140 empty empty hard\\\ clipping 12 8 0 16 #faff00
+#faff00 0;
+#X msg 143 406 open ./guitar.wav \, start;
+#X obj 143 430 readsf~;
+#X obj 53 692 catch~ \$0-output;
+#X obj 53 552 throw~ \$0-output;
+#X obj 53 721 *~ 1;
+#X text 183 518 <- hard clipping;
+#X text 93 484 <- ganancia;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 339 670 graph;
+#X obj 53 430 osc~ 110;
+#X text 19 101 Estos son los controles más comunes de una distorsion:
+;
+#X text 19 31 El límite de una señal de audio es de -1 a 1 \, por
+lo tanto \, cualquier forma de onda mayor a estos valores es cortada
+o "clipped" \, creando así una forma de onda distorsionada a la original
+\, más cuadrada.;
+#X text 29 121 - Ganancia / Drive / Distorsion: el nivel de ganancia
+antes de ser distorsionado.;
+#X text 29 161 - Tono / Tone: el control del tono (opacidad o brillo)
+de la distorsión \, tiende a controlar algún filtro o EQ pre-distorsión.
+;
+#X text 9 11 Distorsión ––––––––;
+#X text 43 346 Ejemplo: escuchemos dos audios de prueba \, un oscilador
+senoidal y una guitarra electrica.;
+#X text 33 586 Usos de [clip~]:;
+#X text 43 606 - Efecto de distorsión;
+#X text 43 626 - Waveshaping de osciladores a diferentes formas de
+onda;
+#X text 33 286 También conocido como clipping digital este corta la
+señal en absoluto. El tipo de distorsión relacionada con este metodo
+es "distortion" (Boss DS-1).;
+#X obj 533 380 nbx 3 19 -100 1e+37 0 1 empty empty Ganancia 0 -8 0
+12 #faff00 #000000 #000000 9 256;
+#X obj 533 404 + 100;
+#X floatatom 533 428 5 0 0 0 - - - 0;
+#X obj 533 451 dbtorms;
+#X floatatom 533 475 5 0 0 0 - - - 0;
+#X text 533 286 Si usamos un control de ganancia lineal \, tendríamos
+que incrementar a valores muy altos para obtener distorsión fuerte.
+Por lo tanto \, un control logarítmico con decibeles es más apropiado.
+;
+#X text 583 404 100 dB = 1 rms;
+#X text 593 451 <- convertidor dB a rms;
+#X msg 533 508 \$1 20;
+#X obj 533 532 line~;
+#X obj 213 478 clip~ -0.75 0.5;
+#X text 323 478 <- dist. asimétrica;
+#X text 499 31 Tipos de distorsión (pedales):;
+#X text 509 51 - Overdrive: Soft Clipping;
+#X text 509 71 - Distortion: Hard Clipping;
+#X text 509 91 - Fuzz: Assymetric Clipping;
+#X text 29 211 - Level / Output: el nivel de salida \, post-distorsión.
+;
+#X obj 53 766 /~ 8;
+#X obj 53 518 clip~ -0.5 0.5;
+#X obj 53 484 *~;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 9 0 10 0;
+#X connect 10 0 47 0;
+#X connect 11 0 13 0;
+#X connect 13 0 7 0;
+#X connect 13 0 45 0;
+#X connect 28 0 29 0;
+#X connect 29 0 30 0;
+#X connect 30 0 31 0;
+#X connect 31 0 32 0;
+#X connect 32 0 36 0;
+#X connect 36 0 37 0;
+#X connect 37 0 47 1;
+#X connect 45 0 0 0;
+#X connect 46 0 12 0;
+#X connect 47 0 46 0;

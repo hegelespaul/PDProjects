@@ -1,0 +1,71 @@
+#N canvas 0 22 1920 1036 12;
+#X obj 307 675 hip~ 3;
+#X obj 307 699 clip~ -1 1;
+#X obj 307 723 /~ 2;
+#X obj 307 747 dac~ 1 2;
+#X obj 307 542 *~ 1;
+#X obj 485 540 loadbang;
+#X obj 485 563 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 485 586 metro 100;
+#X obj 485 610 tabwrite~ \$0-scope;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 486 660 graph;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array array1 171456 float 2;
+#X coords 0 1 171456 -1 200 140 1;
+#X restore 649 138 graph;
+#X obj 247 343 soundfiler;
+#X floatatom 247 367 0 0 0 0 - - - 0;
+#X obj 64 232 bng 19 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj 64 256 openpanel;
+#X text 64 207 Abrir directorio de archivos;
+#X text 226 89 Carga y lectura de archivos ––––––;
+#X obj 682 385 bng 19 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 680 362 Reproducir array;
+#X obj 682 437 tabplay~ array1;
+#X obj 832 466 bng 19 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 245 388 Numero total de samples del archivo;
+#X obj 833 493 spigot;
+#X obj 872 466 tgl 19 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 835 517 bng 19 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X text 860 517 LOOP;
+#X obj 307 651 /~ 8;
+#X text 242 280 read -resize ruta-del-archivo nombre-array1;
+#X obj 43 180 cnv 7 7 140 empty empty soundfiler 12 8 0 16 #faff00
+#faff00 0;
+#X msg 65 279 read \$1 array1;
+#X msg 247 315 read -resize ./archivo.wav array1;
+#X msg 682 409 22000;
+#X obj 649 332 cnv 7 7 140 empty empty playsf~ 12 8 0 16 #faff00 #faff00
+0;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 8 0;
+#X connect 4 0 26 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 11 0 12 0;
+#X connect 13 0 14 0;
+#X connect 14 0 29 0;
+#X connect 17 0 31 0;
+#X connect 19 0 4 0;
+#X connect 19 1 20 0;
+#X connect 20 0 22 0;
+#X connect 22 0 24 0;
+#X connect 23 0 22 1;
+#X connect 24 0 17 0;
+#X connect 26 0 0 0;
+#X connect 29 0 11 0;
+#X connect 30 0 11 0;
+#X connect 31 0 19 0;

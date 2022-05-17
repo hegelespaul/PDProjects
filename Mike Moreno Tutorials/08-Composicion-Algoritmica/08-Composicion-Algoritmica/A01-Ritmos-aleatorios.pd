@@ -1,0 +1,110 @@
+#N canvas 0 22 1920 1036 12;
+#X obj 23 330 hip~ 3;
+#X obj 23 354 clip~ -1 1;
+#X obj 23 378 /~ 2;
+#X obj 23 402 dac~ 1 2;
+#X obj 159 210 loadbang;
+#X obj 159 233 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 159 256 metro 100;
+#X obj 159 280 tabwrite~ \$0-scope;
+#X obj 23 232 catch~ \$0-output;
+#X obj 23 261 *~ 1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 309 210 graph;
+#X obj 23 306 /~ 4;
+#X obj 706 39 nbx 3 19 30 300 0 1 empty empty BPM 0 -8 0 12 #00ff04
+#000000 #000000 120 256;
+#X msg 706 63 60000 \$1;
+#X obj 706 87 /;
+#X obj 706 111 / 4;
+#X obj 664 129 tgl 19 0 empty empty empty 17 7 0 10 #00ff04 #000000
+#000000 0 1;
+#X obj 664 163 metro;
+#X floatatom 706 135 5 0 0 0 - - - 0;
+#X obj 664 187 bng 19 250 50 0 empty empty empty 17 7 0 10 #faff00
+#000000 #000000;
+#X obj 664 380 random 3;
+#X floatatom 664 404 5 0 0 0 - - - 0;
+#X obj 664 447 sel 0 1 2;
+#X obj 554 486 bng 19 250 50 0 empty empty empty 17 7 0 10 #faff00
+#000000 #000000;
+#X obj 684 486 bng 19 250 50 0 empty empty empty 17 7 0 10 #faff00
+#000000 #000000;
+#X obj 814 486 bng 19 250 50 0 empty empty empty 17 7 0 10 #faff00
+#000000 #000000;
+#X msg 554 510 open ./BD.wav \, 1;
+#X obj 554 534 readsf~;
+#X obj 684 534 readsf~;
+#X obj 814 534 readsf~;
+#X msg 684 510 open ./SD.wav \, 1;
+#X msg 814 510 open ./HH.wav \, 1;
+#X obj 684 592 throw~ \$0-output;
+#X obj 696 255 i;
+#X obj 736 255 + 1;
+#X obj 696 303 sel 0;
+#X obj 696 327 bng 19 250 50 0 empty empty empty 17 7 0 10 #00faff
+#000000 #000000;
+#X obj 664 231 t b b;
+#X obj 684 568 +~;
+#X msg 696 351 seed 154611;
+#X obj 696 279 % 16;
+#X text 736 279 <- Numero de pasos;
+#X text 765 256 <- Contador;
+#X text 762 327 <- Reinicia la semilla en el primer paso;
+#X text 727 381 <- 3 posibilidades;
+#X text 9 10 Ritmos aleatorios ––––––;
+#X text 19 119 En este ejemplo usamos un reloj y contador para reiniciar
+la semilla cada 16 pasos.;
+#X obj 558 87 cnv 7 7 140 empty empty random 12 8 0 16 #faff00 #faff00
+0;
+#X text 19 29 En las computadoras es difícil generar números realmente
+aleatorios \, normalmente estos se generan a través de "semillas"
+que dictan una secuencia de números casi aleatoria. En el caso de
+pure data podemos controlar las semillas de estos números para repetir
+patrones o generar ritmos \, melodías y acordes.;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 8 0 9 0;
+#X connect 9 0 7 0;
+#X connect 9 0 11 0;
+#X connect 11 0 0 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 15 0 18 0;
+#X connect 16 0 17 0;
+#X connect 17 0 19 0;
+#X connect 18 0 17 1;
+#X connect 19 0 37 0;
+#X connect 20 0 21 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 22 1 24 0;
+#X connect 22 2 25 0;
+#X connect 23 0 26 0;
+#X connect 24 0 30 0;
+#X connect 25 0 31 0;
+#X connect 26 0 27 0;
+#X connect 27 0 38 0;
+#X connect 28 0 38 0;
+#X connect 29 0 38 0;
+#X connect 30 0 28 0;
+#X connect 31 0 29 0;
+#X connect 33 0 34 0;
+#X connect 33 0 40 0;
+#X connect 34 0 33 1;
+#X connect 35 0 36 0;
+#X connect 36 0 39 0;
+#X connect 37 0 20 0;
+#X connect 37 1 33 0;
+#X connect 38 0 32 0;
+#X connect 39 0 20 0;
+#X connect 40 0 35 0;

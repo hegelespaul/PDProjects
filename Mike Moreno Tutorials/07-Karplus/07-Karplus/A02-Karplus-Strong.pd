@@ -1,0 +1,115 @@
+#N canvas 773 11 918 997 12;
+#X obj 189 690 loadbang;
+#X obj 189 713 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 189 736 metro 100;
+#X obj 189 760 tabwrite~ \$0-scope;
+#X obj 12 246 cnv 7 7 140 empty empty karplus\\\ strong 12 8 0 16 #faff00
+#faff00 0;
+#X obj 53 712 catch~ \$0-output;
+#X obj 53 741 *~ 1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 339 690 graph;
+#X obj 313 421 delread4~ \$0-delay;
+#X obj 143 554 +~;
+#X obj 143 627 throw~ \$0-output;
+#X obj 183 588 delwrite~ \$0-delay 100;
+#X obj 142 461 *~;
+#X obj 313 244 nbx 3 19 20 135 0 1 empty empty MIDI 0 -8 0 12 #00ff04
+#000000 #000000 63 256;
+#X obj 313 268 mtof;
+#X floatatom 313 302 5 0 0 0 - - - 0;
+#X msg 313 335 1000 \$1;
+#X obj 313 359 /;
+#X floatatom 313 393 5 0 0 0 - - - 0;
+#X text 382 347 <- Convertidor Hz a ms;
+#X text 348 266 <- Convertidor MIDI a Hz;
+#X text 385 455 <- feedback (de 0 a 1);
+#X text 9 11 Karplus Strong ––––––;
+#X obj 198 379 bng 19 250 50 0 empty empty empty 17 7 0 10 #00ff04
+#000000 #000000;
+#X obj 198 427 line~;
+#X obj 616 37 notein;
+#X obj 616 61 poly 1 1;
+#X obj 616 85 pack f f f;
+#X obj 616 119 route 1;
+#X obj 616 143 unpack f f;
+#X obj 683 171 sel 0;
+#X msg 198 403 1 \, 0 10;
+#X text 388 499 <- "damp" (sweetspot de 3 kHz a 6 kHz);
+#X text 379 534 <- highpass opcional (SP de 0 a 100 Hz);
+#X text 616 11 Incorporacion MIDI;
+#X text 30 31 Considerado como modelado físico \, el algoritmo karplus
+strong usa impulsos como ruido blanco y otras formas de onda para hacer
+resonar el delay y usa un filtro paso bajo para atenuar las frecuencias
+agudas. Esto da como resultado un sonido tipo cuerda pulsada y puede
+variar dependiendo los tipos de impulso y filtros que se utilizan.
+;
+#X text 226 350 Impulso;
+#X text 30 141 Importante: el tiempo minimo de delay esta limitado
+al block size de nuestro patch.;
+#X obj 616 227 s \$0-midi;
+#X obj 715 200 s \$0-noteOn;
+#X obj 289 203 r \$0-midi;
+#X obj 198 330 r \$0-noteOn;
+#X obj 70 206 block~ 8;
+#N canvas 2 25 1920 1036 dac 0;
+#X obj 98 223 hip~ 3;
+#X obj 98 247 clip~ -1 1;
+#X obj 98 271 /~ 2;
+#X obj 98 305 dac~ 1 2;
+#X obj 98 199 /~ 4;
+#X obj 101 142 inlet~;
+#X obj 212 282 block~ 64;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 0 0;
+#X connect 5 0 4 0;
+#X restore 53 769 pd dac;
+#X obj 313 455 *~ 1;
+#X obj 313 499 lop~ 6000;
+#X obj 313 536 hip~ 50;
+#X obj 142 495 clip~ -0.5 0.5;
+#X obj 142 379 noise~;
+#X obj 198 403;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 3 0;
+#X connect 6 0 43 0;
+#X connect 8 0 44 0;
+#X connect 9 0 10 0;
+#X connect 9 0 11 0;
+#X connect 12 0 47 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 18 0 8 0;
+#X connect 23 0 31 0;
+#X connect 23 0 49 0;
+#X connect 24 0 12 1;
+#X connect 25 0 26 0;
+#X connect 25 1 26 1;
+#X connect 26 0 27 0;
+#X connect 26 1 27 1;
+#X connect 26 2 27 2;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 29 0 38 0;
+#X connect 29 1 30 0;
+#X connect 30 1 39 0;
+#X connect 31 0 24 0;
+#X connect 40 0 13 0;
+#X connect 41 0 23 0;
+#X connect 44 0 45 0;
+#X connect 45 0 46 0;
+#X connect 46 0 9 1;
+#X connect 47 0 9 0;
+#X connect 48 0 12 0;

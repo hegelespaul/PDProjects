@@ -1,0 +1,78 @@
+#N canvas 0 22 1920 1036 12;
+#X obj 53 790 hip~ 3;
+#X obj 53 814 clip~ -1 1;
+#X obj 53 838 /~ 2;
+#X obj 53 862 dac~ 1 2;
+#X obj 189 670 loadbang;
+#X obj 189 693 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 189 716 metro 100;
+#X obj 189 740 tabwrite~ \$0-scope;
+#X obj 12 266 cnv 7 7 140 empty empty comb\\\ filter 12 8 0 16 #faff00
+#faff00 0;
+#X msg 143 346 open ./guitar.wav \, start;
+#X obj 143 370 readsf~;
+#X obj 53 692 catch~ \$0-output;
+#X obj 53 721 *~ 1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 339 670 graph;
+#X obj 333 391 delread4~ \$0-delay;
+#X obj 143 444 +~;
+#X obj 143 557 throw~ \$0-output;
+#X obj 183 518 delwrite~ \$0-delay 100;
+#X obj 44 341 noise~;
+#X obj 44 391 *~;
+#X obj 93 362 tgl 19 1 empty empty empty 17 7 0 10 #00ff04 #000000
+#000000 0 1;
+#X obj 333 214 nbx 3 19 20 135 0 1 empty empty MIDI 0 -8 0 12 #00ff04
+#000000 #000000 99 256;
+#X obj 333 238 mtof;
+#X floatatom 333 272 5 0 0 0 - - - 0;
+#X msg 333 305 1000 \$1;
+#X obj 333 329 /;
+#X floatatom 333 363 5 0 0 0 - - - 0;
+#X text 395 316 <- Convertidor Hz a ms;
+#X text 368 236 <- Convertidor MIDI a Hz;
+#X text 9 11 De Comb Filter a Karplus Strong ––––––;
+#X text 19 31 La única diferencia entre un comb filter y un feedback
+delay es el tiempo de delay que este maneja. Los comb filters manejan
+el tiempo de delay basándose en el ancho de forma de onda del espectro
+audible. Ejemplo: 1000 Hz = 1 ms;
+#X text 395 425 <- feedback (de 0 a 1);
+#X text 19 101 Cuando el feedback está lo suficiente alto \, empieza
+a resonar a la frecuencia definida y podemos usar impulsos como ruido
+blanco para provocar la resonancia.;
+#X obj 53 766 /~ 4;
+#X obj 333 425 *~ 0.99;
+#X obj 143 476 clip~ -1 1;
+#X obj 44 365 /~ 32;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 9 0 10 0;
+#X connect 10 0 15 0;
+#X connect 11 0 12 0;
+#X connect 12 0 7 0;
+#X connect 12 0 33 0;
+#X connect 14 0 34 0;
+#X connect 15 0 35 0;
+#X connect 18 0 36 0;
+#X connect 19 0 15 0;
+#X connect 20 0 19 1;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 24 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 26 0 14 0;
+#X connect 33 0 0 0;
+#X connect 34 0 15 1;
+#X connect 35 0 17 0;
+#X connect 35 0 16 0;
+#X connect 36 0 19 0;

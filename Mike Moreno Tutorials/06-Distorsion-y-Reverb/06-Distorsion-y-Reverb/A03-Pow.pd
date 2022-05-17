@@ -1,0 +1,144 @@
+#N canvas 21 32 1920 1036 12;
+#X obj 62 685 hip~ 3;
+#X obj 62 709 clip~ -1 1;
+#X obj 62 733 /~ 2;
+#X obj 62 757 dac~ 1 2;
+#X obj 198 565 loadbang;
+#X obj 198 588 tgl 18 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 198 611 metro 100;
+#X obj 198 635 tabwrite~ \$0-scope;
+#X obj 21 21 cnv 7 7 140 empty empty pow~ 12 8 0 16 #faff00 #faff00
+0;
+#X msg 162 231 open ./guitar.wav \, start;
+#X obj 162 255 readsf~;
+#X obj 62 587 catch~ \$0-output;
+#X obj 62 477 throw~ \$0-output;
+#X obj 62 616 *~ 1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array \$0-scope 441 float 0;
+#X coords 0 1 440 -1 200 140 1;
+#X restore 364 572 graph;
+#X obj 62 439 pow~ 2;
+#X obj 101 410 nbx 3 19 1 1e+37 0 1 empty empty Potencia 0 -8 0 12
+#faff00 #000000 #000000 3 256;
+#X obj 220 319 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#faff00 #000000 #000000 0 256;
+#X obj 223 297 hsl 128 15 0 1 0 0 empty empty Volumen\\\ (0\\\ a\\\ 1)
+-2 -8 0 10 #faff00 #000000 #faff00 0 1;
+#X obj 220 340 pack f 20;
+#X obj 220 364 line~;
+#X obj 62 383 *~;
+#X text 1655 103 Con mayor potencia se reduce más el rango dinámico
+de nuestra señal.;
+#X obj 521 21 cnv 7 7 140 empty empty power~ 12 8 0 16 #faff00 #faff00
+0;
+#X text 542 41 else/power~;
+#X msg 1032 125 open ./guitar.wav \, start;
+#X obj 1032 149 readsf~;
+#X text 42 171 IMPORTANTE: Nuestra señal entrante debe ser entre -1
+y 1 de lo contrario podría explotar en volumen.;
+#X obj 1032 415 throw~ \$0-output;
+#X obj 1032 376 hip~ 40;
+#X obj 1078 323 nbx 3 19 1 1e+37 0 1 empty empty Potencia 0 -8 0 12
+#faff00 #000000 #000000 2 256;
+#X text 1092 376 <- rectifica señales unipolares a bipolares;
+#X obj 1032 352 pow~;
+#X obj 1275 184 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0
+10 #faff00 #000000 #000000 0 256;
+#X obj 1278 162 hsl 128 15 1 50 0 1 empty empty Ganancia\\\ (1\\\ a\\\ 50)
+-2 -8 0 10 #faff00 #000000 #faff00 1400 1;
+#X obj 1275 205 pack f 20;
+#X obj 1275 229 line~;
+#X obj 1032 248 *~;
+#X obj 1011 21 cnv 7 7 140 empty empty pow~\\\ con\\\ distorsión 12
+8 0 16 #faff00 #faff00 0;
+#X msg 552 155 open ./guitar.wav \, start;
+#X obj 552 179 readsf~;
+#X obj 552 421 throw~ \$0-output;
+#X obj 552 283 else/drive~;
+#X obj 552 351 else/power~;
+#X obj 793 289 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#faff00 #000000 #000000 0 256;
+#X obj 796 269 hsl 128 15 0.1 10 1 1 empty empty Potencia -2 -8 0 10
+#faff00 #000000 #faff00 11900 1;
+#X obj 793 308 pack f 20;
+#X obj 793 332 line~;
+#X obj 626 230 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+#faff00 #000000 #000000 0 256;
+#X obj 629 208 hsl 128 15 1 50 0 1 empty empty Ganancia\\\ (1\\\ a\\\ 50)
+-2 -8 0 10 #faff00 #000000 #faff00 3600 1;
+#X obj 626 251 else/float2sig~ 50;
+#X obj 62 231 osc~ 110;
+#X obj 62 279 *~;
+#X obj 80 255 osc~ 0.25;
+#X obj 762 131 osc~ 110;
+#X obj 762 179 *~;
+#X obj 780 155 osc~ 0.25;
+#X obj 1223 92 osc~ 110;
+#X obj 1223 140 *~;
+#X obj 1241 116 osc~ 0.25;
+#X text 552 61 Este external siempre es bipolar y genera armónicos
+impares y omite ciertos valores de amplitud bajos mientras eleva los
+valores altos. Este tipo de efecto se asocia con el tipo de distorsión
+"tube screamer".;
+#X text 42 81 Potencias en números pares generan armónicos pares
+y hace la señal unipolar \, mientras que los números impares hacen
+lo contrario.;
+#X text 42 41 Es posible generar diferentes armónicos y distorsiones
+elevando la señal a una potencia [pow~].;
+#X text 1032 41 En nuestras distorsiones \, [pow~] ayuda a elevar el
+brillo de ciertos armónicos.;
+#X text 42 511 Usos: agregar más armónicos a nuestras distorsiones.
+;
+#X text 1126 273 <- Distorsion asimetrica tipo "fuzz";
+#X obj 1032 273 clip~ -0.2 1;
+#X obj 62 661 /~ 2;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 0 3 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 9 0 10 0;
+#X connect 10 0 21 0;
+#X connect 11 0 13 0;
+#X connect 13 0 7 0;
+#X connect 13 0 67 0;
+#X connect 15 0 12 0;
+#X connect 16 0 15 1;
+#X connect 17 0 19 0;
+#X connect 18 0 17 0;
+#X connect 19 0 20 0;
+#X connect 20 0 21 1;
+#X connect 21 0 15 0;
+#X connect 25 0 26 0;
+#X connect 26 0 37 0;
+#X connect 29 0 28 0;
+#X connect 30 0 32 1;
+#X connect 32 0 29 0;
+#X connect 33 0 35 0;
+#X connect 34 0 33 0;
+#X connect 35 0 36 0;
+#X connect 36 0 37 1;
+#X connect 37 0 66 0;
+#X connect 39 0 40 0;
+#X connect 40 0 42 0;
+#X connect 42 0 43 0;
+#X connect 43 0 41 0;
+#X connect 44 0 46 0;
+#X connect 45 0 44 0;
+#X connect 46 0 47 0;
+#X connect 47 0 43 1;
+#X connect 48 0 50 0;
+#X connect 49 0 48 0;
+#X connect 50 0 42 1;
+#X connect 51 0 52 0;
+#X connect 53 0 52 1;
+#X connect 54 0 55 0;
+#X connect 56 0 55 1;
+#X connect 57 0 58 0;
+#X connect 59 0 58 1;
+#X connect 66 0 32 0;
+#X connect 67 0 0 0;
